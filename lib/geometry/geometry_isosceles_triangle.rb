@@ -4,14 +4,10 @@ module Geometry::IsoscelesTriangle
 		@type = type
 		@label_color = 'black'
 		@id = rand(1..999)
-		@html = "<div id='mygraphiccontainer#{@id}' style='position: relative;width: 100px;height:100px;'></div>"
+		@html = "<div id='mygraphiccontainer#{@id}' class='geometry_figure' style='position: relative;width: 100px;height:100px;'></div>"
 		case @type
 		when 2
-			@js = "<script>YUI().use('graphics',function(e){var o=new e.Graphic({autoSize:!0,render:'#mygraphiccontainer#{@id}'}),i=o.addShape({type:'path',stroke:{weight:2,color:'#000',opacity:1}});i.moveTo(0,100),i.lineTo(150,30),i.lineTo(150,100),i.lineTo(0,100),i.end()});</script>"
-		when 3
-			@js = "<script>YUI().use('graphics',function(e){var o=new e.Graphic({autoSize:!0,render:'#mygraphiccontainer#{@id}'}),i=o.addShape({type:'path',stroke:{weight:2,color:'#000',opacity:1}});i.moveTo(30,50),i.lineTo(150,50),i.lineTo(30,120),i.lineTo(30,50),i.end()});</script>"	
-		when 4
-			@js = "<script>YUI().use('graphics',function(e){var o=new e.Graphic({autoSize:!0,render:'#mygraphiccontainer#{@id}'}),i=o.addShape({type:'path',stroke:{weight:2,color:'#000',opacity:1}});i.moveTo(150,50),i.lineTo(150,150),i.lineTo(30,50),i.lineTo(150,50),i.end()});</script>"		
+			@js = "<script>YUI().use('graphics',function(e){var o=new e.Graphic({autoSize:!0,render:'#mygraphiccontainer#{@id}'}),i=o.addShape({type:'path',stroke:{weight:2,color:'#000',opacity:1}});i.moveTo(50,100),i.lineTo(0,0),i.lineTo(100,0),i.lineTo(50,100),i.end()});</script>"
 		else
 			@js = "<script>YUI().use('graphics',function(e){var o=new e.Graphic({autoSize:!0,render:'#mygraphiccontainer#{@id}'}),i=o.addShape({type:'path',stroke:{weight:2,color:'#000',opacity:1}});i.moveTo(50,0),i.lineTo(0,100),i.lineTo(100,100),i.lineTo(50,0),i.end()});</script>"
 		end
@@ -30,24 +26,16 @@ module Geometry::IsoscelesTriangle
 		"#{@html}#{@js}"
 	end
 
-	def self.add_labels(hyp, side, base)
+	def self.add_labels(base, side1, side2)
 		case @type
 		when 2
-			new_label = "<div id='hyp' style='z-index: 99;position: relative;top: 30px;left: 75px;color: #{@label_color};font-weight: bold;'>#{hyp.to_s.empty? ? '&nbsp;' : hyp}</div>"
-			new_label = "#{new_label}<div id='base' style='z-index: 99;position: relative;top: 90px;left: 75px;color: #{@label_color};font-weight: bold;'>#{base.to_s.empty? ? '&nbsp;' : base}</div>"	
-			new_label = "#{new_label}<div id='side' style='z-index: 99;position: relative;top: 20px;left: 160px;color: #{@label_color};font-weight: bold;'>#{side.to_s.empty? ? '&nbsp;' : side}</div>"
-		when 3
-			new_label = "<div id='hyp' style='z-index: 99;position: relative;top: 95px;left: 85px;color: #{@label_color};font-weight: bold;'>#{hyp.to_s.empty? ? '&nbsp;' : hyp}</div>"
-			new_label = "#{new_label}<div id='base' style='z-index: 99;position: relative;top: 10px;left: 75px;color: #{@label_color};font-weight: bold;'>#{base.to_s.empty? ? '&nbsp;' : base}</div>"	
-			new_label = "#{new_label}<div id='side' style='z-index: 99;position: relative;top: 40px;left: 10px;color: #{@label_color};font-weight: bold;'>#{side.to_s.empty? ? '&nbsp;' : side}</div>"	
-		when 4
-			new_label = "<div id='hyp' style='z-index: 99;position: relative;top: 95px;left: 70px;color: #{@label_color};font-weight: bold;'>#{hyp.to_s.empty? ? '&nbsp;' : hyp}</div>"
-			new_label = "#{new_label}<div id='base' style='z-index: 99;position: relative;top: 10px;left: 95px;color: #{@label_color};font-weight: bold;'>#{base.to_s.empty? ? '&nbsp;' : base}</div>"	
-			new_label = "#{new_label}<div id='side' style='z-index: 99;position: relative;top: 40px;left: 160px;color: #{@label_color};font-weight: bold;'>#{side.to_s.empty? ? '&nbsp;' : side}</div>"	
+			new_label = "<div id='itbase' style='z-index: 99;position: relative;left: 40px;color: #{@label_color};font-weight: bold;'>#{base.to_s.empty? ? '&nbsp;' : base}</div>"
+			new_label = "#{new_label}<div id='itside1' style='z-index: 99;position: relative;top: 15px;left: 0px;color: #{@label_color};font-weight: bold;'>#{side1.to_s.empty? ? '&nbsp;' : side1}</div>"	
+			new_label = "#{new_label}<div id='itside2' style='z-index: 99;position: relative;top: 0px;left: 85px;color: #{@label_color};font-weight: bold;'>#{side2.to_s.empty? ? '&nbsp;' : side2}</div>"
 		else
-			new_label = "<div id='hyp' style='z-index: 99;position: relative;top: 45px;left: 125px;color: #{@label_color};font-weight: bold;'>#{hyp.to_s.empty? ? '&nbsp;' : hyp}</div>"
-			new_label = "#{new_label}<div id='base' style='z-index: 99;position: relative;top: 90px;left: 105px;color: #{@label_color};font-weight: bold;'>#{base.to_s.empty? ? '&nbsp;' : base}</div>"	
-			new_label = "#{new_label}<div id='side' style='z-index: 99;position: relative;top: 20px;left: 30px;color: #{@label_color};font-weight: bold;'>#{side.to_s.empty? ? '&nbsp;' : side}</div>"			
+			new_label = "<div id='itbase' style='z-index: 99;position: relative;left: 45px;top: 110px;color: #{@label_color};font-weight: bold;'>#{base.to_s.empty? ? '&nbsp;' : base}</div>"
+			new_label = "#{new_label}<div id='itside1' style='z-index: 99;position: relative;top: 15px;left: 0px;color: #{@label_color};font-weight: bold;'>#{side1.to_s.empty? ? '&nbsp;' : side1}</div>"	
+			new_label = "#{new_label}<div id='itside2' style='z-index: 99;position: relative;top: 0px;left: 85px;color: #{@label_color};font-weight: bold;'>#{side2.to_s.empty? ? '&nbsp;' : side2}</div>"
 		end
 		@html = "#{@html.reverse.sub('>vid/<', '').reverse}#{new_label}</div>"	
 		return self

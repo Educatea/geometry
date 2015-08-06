@@ -4,7 +4,7 @@ module Geometry::RightTriangle
 		@type = type
 		@label_color = 'black'
 		@id = rand(1..999)
-		@html = "<div id='mygraphiccontainer#{@id}' style='position: relative;width: 100px;height:100px;'></div>"
+		@html = "<div id='mygraphiccontainer#{@id}' class='geometry_figure' style='position: relative;width: 100px;height:100px;'></div>"
 		case @type
 		when 2
 			@js = "<script>YUI().use('graphics',function(e){var o=new e.Graphic({autoSize:!0,render:'#mygraphiccontainer#{@id}'}),i=o.addShape({type:'path',stroke:{weight:2,color:'#000',opacity:1}});i.moveTo(0,100),i.lineTo(150,30),i.lineTo(150,100),i.lineTo(0,100),i.end()});</script>"
