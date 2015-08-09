@@ -1,19 +1,22 @@
 module Geometry::RightTriangle
 
-	def self.build(type = 1)
-		@type = type
-		@label_color = 'black'
-		@id = rand(1..999)
-		@html = "<div id='mygraphiccontainer#{@id}' class='geometry_figure' style='position: relative;width: 100px;height:100px;'></div>"
+	def self.build(options = {})
+		@type = options[:type] || 1
+		@label_color = options[:label_color] || 'black'
+		@line_color = options[:line_color] || 'black'
+		@graphic_class = options[:graphic_class] || 'geometry_figure'
+		@style = options[:style] || ''
+		@id = options[:id] || rand(1..999)
+		@html = "<div id='mygraphiccontainer#{@id}' class='#{@graphic_class}' style='position: relative;width: 100px;height:100px;#{@style}'></div>"
 		case @type
 		when 2
-			@js = "<script>YUI().use('graphics',function(e){var o=new e.Graphic({autoSize:!0,render:'#mygraphiccontainer#{@id}'}),i=o.addShape({type:'path',stroke:{weight:2,color:'#000',opacity:1}});i.moveTo(0,100),i.lineTo(150,30),i.lineTo(150,100),i.lineTo(0,100),i.end()});</script>"
+			@js = "<script>YUI().use('graphics',function(e){var o=new e.Graphic({autoSize:!0,render:'#mygraphiccontainer#{@id}'}),i=o.addShape({type:'path',stroke:{weight:2,color:'#{@line_color}',opacity:1}});i.moveTo(0,100),i.lineTo(150,30),i.lineTo(150,100),i.lineTo(0,100),i.end()});</script>"
 		when 3
-			@js = "<script>YUI().use('graphics',function(e){var o=new e.Graphic({autoSize:!0,render:'#mygraphiccontainer#{@id}'}),i=o.addShape({type:'path',stroke:{weight:2,color:'#000',opacity:1}});i.moveTo(30,50),i.lineTo(150,50),i.lineTo(30,120),i.lineTo(30,50),i.end()});</script>"	
+			@js = "<script>YUI().use('graphics',function(e){var o=new e.Graphic({autoSize:!0,render:'#mygraphiccontainer#{@id}'}),i=o.addShape({type:'path',stroke:{weight:2,color:'#{@line_color}',opacity:1}});i.moveTo(30,50),i.lineTo(150,50),i.lineTo(30,120),i.lineTo(30,50),i.end()});</script>"	
 		when 4
-			@js = "<script>YUI().use('graphics',function(e){var o=new e.Graphic({autoSize:!0,render:'#mygraphiccontainer#{@id}'}),i=o.addShape({type:'path',stroke:{weight:2,color:'#000',opacity:1}});i.moveTo(150,50),i.lineTo(150,150),i.lineTo(30,50),i.lineTo(150,50),i.end()});</script>"		
+			@js = "<script>YUI().use('graphics',function(e){var o=new e.Graphic({autoSize:!0,render:'#mygraphiccontainer#{@id}'}),i=o.addShape({type:'path',stroke:{weight:2,color:'#{@line_color}',opacity:1}});i.moveTo(150,50),i.lineTo(150,150),i.lineTo(30,50),i.lineTo(150,50),i.end()});</script>"		
 		else
-			@js = "<script>YUI().use('graphics',function(e){var o=new e.Graphic({autoSize:!0,render:'#mygraphiccontainer#{@id}'}),i=o.addShape({type:'path',stroke:{weight:2,color:'#000',opacity:1}});i.moveTo(50,100),i.lineTo(50,30),i.lineTo(200,100),i.lineTo(50,100),i.end()});</script>"
+			@js = "<script>YUI().use('graphics',function(e){var o=new e.Graphic({autoSize:!0,render:'#mygraphiccontainer#{@id}'}),i=o.addShape({type:'path',stroke:{weight:2,color:'#{@line_color}',opacity:1}});i.moveTo(50,100),i.lineTo(50,30),i.lineTo(200,100),i.lineTo(50,100),i.end()});</script>"
 		end
 		return self
 	end

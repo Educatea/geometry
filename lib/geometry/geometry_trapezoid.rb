@@ -1,4 +1,4 @@
-module Geometry::IsoscelesTriangle
+module Geometry::Trapezoid
 
 	def self.build(options = {})
 		type = options[:type] || 1
@@ -11,9 +11,9 @@ module Geometry::IsoscelesTriangle
 		@html = "<div id='mygraphiccontainer#{@id}' class='#{graphic_class}' style='position: relative;width: 100px;height:100px;#{style}'></div>"
 		case @type
 		when 2
-			@js = "<script>YUI().use('graphics',function(e){var o=new e.Graphic({autoSize:!0,render:'#mygraphiccontainer#{@id}'}),i=o.addShape({type:'path',stroke:{weight:2,color:'#{line_color}',opacity:1}});i.moveTo(50,100),i.lineTo(0,0),i.lineTo(100,0),i.lineTo(50,100),i.end()});</script>"
+			@js = "<script>YUI().use('graphics',function(e){var o=new e.Graphic({autoSize:!0,render:'#mygraphiccontainer#{@id}'}),i=o.addShape({type:'path',stroke:{weight:2,color:'#{line_color}',opacity:1}});i.moveTo(50,0),i.lineTo(0,100),i.lineTo(200,100),i.lineTo(150,0),i.lineTo(50,0),i.end()});</script>"
 		else
-			@js = "<script>YUI().use('graphics',function(e){var o=new e.Graphic({autoSize:!0,render:'#mygraphiccontainer#{@id}'}),i=o.addShape({type:'path',stroke:{weight:2,color:'#{line_color}',opacity:1}});i.moveTo(50,0),i.lineTo(0,100),i.lineTo(100,100),i.lineTo(50,0),i.end()});</script>"
+			@js = "<script>YUI().use('graphics',function(e){var o=new e.Graphic({autoSize:!0,render:'#mygraphiccontainer#{@id}'}),i=o.addShape({type:'path',stroke:{weight:2,color:'#{line_color}',opacity:1}});i.moveTo(50,0),i.lineTo(0,100),i.lineTo(200,100),i.lineTo(150,0),i.lineTo(50,0),i.end()});</script>"
 		end
 		return self
 	end
